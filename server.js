@@ -1,5 +1,7 @@
 const express = require ('express');
 const app = express();
+app.use(express.json());
+
 const mockUserData=[
   {name:'Mark'},
   {name:'Jill'}
@@ -15,18 +17,34 @@ const mockUserData=[
   });
 
 
-  app.get('/users/:id', function(req,res){
-    console.log(req.params.id);
+  app.get('/users/:id',function(req,res){
+    console.log(req.params.id)
     res.json({
-       success: true,
-       message: 'successfully got users. Nice!',
-       users: req.params.id
-    });
-    console.log("Send responce to JSON with", req.params.id);
-    
-    
- });
+      success: true,
+      message: 'got one user',
+      user: req.params.id
+    })
+  })
 
-app.listen(8000, function test(){console.log(
+
+ app.post('/login', function(req,res){
+
+
+  if (req.body.username="p1") {
+    res.json({
+      success: true,
+      message: 'successfully got users '+req.body.username+' Nice!',
+      users: req.body.username
+    });
+  }
+  
+  
+  console.log("Send responce to JSON with", req.params.id);
+  
+  
+});
+
+
+ app.listen(8000, function test(){console.log(
 "Running 8000 port") ;
 });
